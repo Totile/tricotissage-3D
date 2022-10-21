@@ -1,3 +1,6 @@
+# sample of code from `https://ezdxf.readthedocs.io/en/stable/addons/drawing.html`
+# given the path to a .dxf file (`DXF_FILE`), creates very simple visualisation
+
 import sys
 import matplotlib.pyplot as plt
 from ezdxf import recover
@@ -24,5 +27,3 @@ def visualisation(DXF_file):
         out = MatplotlibBackend(ax)
         Frontend(ctx, out).draw_layout(doc.modelspace(), finalize=True)
         fig.savefig(DXF_file[:-3] + 'png', dpi=300)
-
-#print('file.dxf'[: -3] + 'png')

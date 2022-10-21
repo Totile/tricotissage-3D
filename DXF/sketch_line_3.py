@@ -6,7 +6,7 @@ from visualisation import visualisation
 from get_source_code import get_source_code
 
 FILE_NAME = 'arete_5-8.dxf'
-save_as = 'code2dxf_2.dxf'
+save_as = 'code2dxf.dxf'
 get_source_code(FILE_NAME=FILE_NAME) # edits the file 'source_code.py' with the ezdxf code corresponding to 'FILE_NAME'
 
 from source_code import layout
@@ -66,7 +66,7 @@ points_Vec2 = [ezdxf.math.Vec2(U[:2]) for U in points]
 
 margin = 20
 
-nb_nails = 35
+nb_nails = 45
 length_nail = 10
 width_nail = 3
 

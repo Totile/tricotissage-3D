@@ -86,7 +86,7 @@ def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dx
             x-=dx
             y-=dy
         except:
-            print()
+            print('Error in sketch_nails.py line 89')
         return (x, y) + (len(U) - 2)*(0.,)
     
     points = [relative2absolute(point) for point in points]
@@ -148,6 +148,7 @@ def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dx
             spline += [(x_inter1 - length_nail, y_inter2, 0., 0., 0.), (x_inter2, y_inter2, 0., 0., 0.)]
         
             # saving the "coordinate of the nail"
+            #print((y_inter1 + y_inter2) / 2)
             nails.append((x_inter1 - length_nail, (y_inter1 + y_inter2) / 2))
 
         while (i < length_original_spline) and (points_in_spline[i][1] < y + width_nail): # looking for the last point of the original spline with a y-coordinate < y
@@ -168,6 +169,11 @@ def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dx
     width_notches_down = 5
     height_notches_down = 5
     nb_notches_down = 2
+
+    diameter = 3.2
+    d1_center_hole = 30
+    d2_center_hole = 45
+    distance_down = 6
 
     Dx_vertical = 30
     Dx_diagonal = 30
@@ -235,6 +241,13 @@ def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dx
 
     offset_x = 20
 
-    nails = [relative2absolute(nail, offset=(offset_x, height_notches_down)) for nail in nails]
+    diameter = 3.2
+    d1_center_hole = 30
+    d2_center_hole = 45
+    distance_down = 6
 
-    return {'spline' : spline, 'nails' : nails}
+    nails = [relative2absolute(nail, offset=(offset_x, - Dy_diagonal - Dy_vertical)) for nail in nails]
+
+    holes = [[(x_inf_down + d1_center_hole, distance_down - Dy_diagonal - Dy_vertical ), diameter/2], [(x_inf_down + d2_center_hole, distance_down - Dy_diagonal - Dy_vertical ), diameter/2]]
+
+    return {'spline' : spline, 'nails' : nails, 'holes' : holes}

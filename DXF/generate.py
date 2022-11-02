@@ -15,6 +15,7 @@ generate = generate_nails(from_file=FILE_NAME,
 
 spline = generate['spline']
 nails = generate['nails']
+holes = generate['holes']
 
 # Create a new DXF R2010 drawing, official DXF version name: "AC1024"
 doc = ezdxf.new('R2010')
@@ -24,6 +25,10 @@ msp = doc.modelspace()
 line = msp.add_lwpolyline(spline)
 line.close(state=True)
 #msp.add_circle((-20, 0), 5)
+
+for hole in holes:
+    center, radius = hole
+    msp.add_circle(center=center, radius=radius)
 
 doc.saveas(save_final_as)
 visualisation(save_final_as)

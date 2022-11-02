@@ -44,7 +44,8 @@ def tostr(point):
             res += ', '
         return res[:-2]
 
-print(f'{2.365698:.2e}')
-dic = {'1' : '4', '2' : []}
-for item in dic:
-    print(item)
+hole = [(1, 0), 3]
+
+center, radius = hole
+
+print(center, radius)

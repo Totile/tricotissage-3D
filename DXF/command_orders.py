@@ -1,9 +1,9 @@
 import numpy as np
 
 # lengths must be entered in millimeters
-lx = 100 
-ly = 50
-lz = 2
+lx = 0 
+ly = 0
+lz = 0
 offset = np.array((lx, ly, lz))
 
 theta = 360 * np.pi / (16 * 180)
@@ -77,7 +77,7 @@ def motif(list_1, list_2):
 # we assume that the structure is installed so that the "arete" 0 (in "coordinates.txt") 
 # is parallel to the y-axis in the direction of the robot (OA,-ex) > 0
 
-with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r', encoding='utf-8') as f:
+with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r', encoding='utf-8') as coordinates_file:
     
     join_on = '\n'
 
@@ -85,9 +85,9 @@ with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r'
     # the list of notches' coordinates on each arete
     coordinates = {}
 
-    for line in f:
+    for line in coordinates_file:
         unique_id_arete, r, h = line.split(',')
-        coordinates.setdefault(str(unique_id_arete), []).append(polar2cartesian(float(unique_id_arete), float(r), float(h)))
+        coordinates.setdefault(str(unique_id_arete), []).append(frame2robot(polar2cartesian(float(unique_id_arete), float(r), float(h))))
     
     nb_aretes = len(coordinates.keys())
     
@@ -124,5 +124,5 @@ with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r'
                 """
                 for point in motif(coordinates[f'{n}'], coordinates[f'{n + 1}']):
                     orders.write(tostr(point) + '\n')
-                orders.write('\n') ## orders.write(f"rotation_plateau_angle {radian2degree(theta)}\n") 
+                orders.write('vbzevikzjbvkzej\n') ## orders.write(f"rotation_plateau_angle {radian2degree(theta)}\n") 
                 n += 1

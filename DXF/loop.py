@@ -24,6 +24,7 @@ for k, FILE_NAME in enumerate(FILE_NAMES):
 
     spline = generate['spline']
     nails = generate['nails']
+    holes = generate['holes']
     print(FILE_NAME)
     NAILS[FILE_NAME] = nails
 
@@ -34,5 +35,10 @@ for k, FILE_NAME in enumerate(FILE_NAMES):
     msp = doc.modelspace()
     line = msp.add_lwpolyline(spline)
     line.close(state=True)
+
+    for hole in holes:
+        center, radius = hole
+        msp.add_circle(center=center, radius=radius)
+
     doc.saveas(save_as)
     visualisation(save_as)

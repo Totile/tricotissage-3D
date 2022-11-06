@@ -5,7 +5,7 @@ from get_source_code import get_source_code
 from importlib import reload 
 
 # the name of the .dxf file generated from informations of the original .dxf file interpreted in python
-save_dxf2code_as = '/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/code2dxf.dxf' 
+save_dxf2code_as = './DXF_files/code2dxf.dxf' 
 
 def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dxf2code_as):
     
@@ -161,7 +161,7 @@ def generate_nails(from_file, nb_nails, length_nail, width_nail, save_as=save_dx
     distance2outer_radius_up = 6
     distance_between_notches_up = 22
     width_notches_up = 8
-    height_notches_up = 5
+    height_notches_up = 10
     nb_notches_up = 2
 
     distance2outer_radius_down = 12.5

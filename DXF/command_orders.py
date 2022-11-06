@@ -1,12 +1,13 @@
 import numpy as np
 
+# offset is the vector 'origin of the robot -> origin of the structure'
 # lengths must be entered in millimeters
-lx = 0 
+lx = 0
 ly = 0
 lz = 0
 offset = np.array((lx, ly, lz))
 
-theta = 360 * np.pi / (16 * 180)
+theta = 2 * np.pi / 16
 
 def polar2cartesian(k, r, h):
     """
@@ -34,7 +35,7 @@ def rotation(x, rho):
     return np.dot(R, x)
 
 def frame2robot(x):
-    return x - offset
+    return x + offset
 
 def radian2degree(angle):
     return angle * 180 / np.pi
@@ -77,7 +78,7 @@ def motif(list_1, list_2):
 # we assume that the structure is installed so that the "arete" 0 (in "coordinates.txt") 
 # is parallel to the y-axis in the direction of the robot (OA,-ex) > 0
 
-with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r', encoding='utf-8') as coordinates_file:
+with open(f'./coordinates.txt', 'r', encoding='utf-8') as coordinates_file:
     
     join_on = '\n'
 
@@ -87,7 +88,9 @@ with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r'
 
     for line in coordinates_file:
         unique_id_arete, r, h = line.split(',')
-        coordinates.setdefault(str(unique_id_arete), []).append(frame2robot(polar2cartesian(float(unique_id_arete), float(r), float(h))))
+        coordinates.setdefault(str(unique_id_arete), []).append(polar2cartesian(float(unique_id_arete),
+                                                                                 float(r), 
+                                                                                 float(h)))
     
     nb_aretes = len(coordinates.keys())
     
@@ -98,31 +101,22 @@ with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/coordinates.txt', 'r'
             res += ', '
         return res[:-2]
 
-    with open(f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/command_orders.txt', 'w', encoding='utf-8') as orders:
+    with open(f'./command_orders.txt', 'w', encoding='utf-8') as orders:
         
         # INITIALISATION
         # rotation du plateau pour se trouver dans la configuration initiale
-        orders.write('\n') ## orders.write(f"rotation_plateau_angle {- radian2degree(theta)/2}\n\n") 
+        orders.write('\n') #orders.write('rotation initiale\n\n') ## orders.write(f"rotation_plateau_angle {- radian2degree(theta)/2}\n\n") 
         n = 0
 
         # RECURRENCE
-        while n < nb_aretes - 1:
-            #print(n)
-            if n == nb_aretes :
-                # traiter le cas de n = 15, n + 1 = 0
-                motif_ = motif(coordinates[f'{n}'], coordinates['0'])
-                motif_str = [str(tuple(point)) for point in motif_]
-                orders.write(join_on.join(motif_str))
-                n += 1
-                break
+        while n < nb_aretes :
 
-            else : 
-                """
-                motif_ = motif(coordinates[f'{n}'], coordinates[f'{n + 1}'])
-                motif_str = [str(point) for point in motif_]
-                orders.write(join_on.join(motif_str))
-                """
-                for point in motif(coordinates[f'{n}'], coordinates[f'{n + 1}']):
-                    orders.write(tostr(point) + '\n')
-                orders.write('vbzevikzjbvkzej\n') ## orders.write(f"rotation_plateau_angle {radian2degree(theta)}\n") 
-                n += 1
+            phi = n * theta - theta / 2
+            
+            list_1 = [frame2robot(coordinate) for coordinate in coordinates[f'{n}']]
+            list_2 = [frame2robot(coordinate) for coordinate in coordinates[f'{(n+1) % nb_aretes}']]
+            motif_ = motif(list_1, list_2)
+            for point in motif_:
+                orders.write(tostr(point) + '\n')
+            orders.write('\n') #orders.write(f"\nrotation_plateau_angle {radian2degree(theta)}\n\n") 
+            n += 1

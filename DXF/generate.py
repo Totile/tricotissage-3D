@@ -5,8 +5,8 @@ from visualisation import visualisation
 from sketch_nails import generate_nails
 
 
-FILE_NAME = '/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/arete_1-16.dxf'
-save_final_as = '/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/production.dxf'
+FILE_NAME = './DXF_files/arete_1-16.dxf'
+save_final_as = './DXF_files/production.dxf'
 
 generate = generate_nails(from_file=FILE_NAME, 
                                 nb_nails=15, 

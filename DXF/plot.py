@@ -1,8 +1,12 @@
-import matplotlib as mpl
-from mpl_toolkits.mplot3d import Axes3D
+from source_code import layout
 import numpy as np
+import ezdxf
+
+import matplotlib as mpl
 import matplotlib.pyplot as plt
-from command_orders import coordinates, motif
+from command_orders import coordinates, rotation
+
+from mpl_toolkits.mplot3d import Axes3D
 
 Float = np.vectorize(float)
 
@@ -11,31 +15,39 @@ mpl.rcParams['legend.fontsize'] = 10
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 
-arete_0, arete_1 = coordinates['0'], coordinates['1']
-MOTIF = motif(arete_0, arete_1)
+# tracé de l'axe des altitudes
+J = np.linspace(0, 400, 100)
+H = I = np.zeros(shape=(100, ))
+ax.plot(H, I, J, label='z-axis')
 
-for i in range(len(MOTIF) - 1):
-    x1, y1, z1 = MOTIF[i]
-    x2, y2, z2 = MOTIF[i+1]
+with open(f'./command_orders_rotation.txt', 'r', encoding='utf-8') as command_orders:
 
-    T = np.linspace(0, 1, 100)
-    X = (1 - T) * x1 + T * x2
-    Y = (1 - T) * y1 + T * y2
-    Z = (1 - T) * z1 + T * z2
-    ax.plot(X, Y, Z)
+    for unique_id_arete in coordinates:
+        A = []
+        B = []
+        C = []
+        for point in coordinates[unique_id_arete]:
+            x, y, z  = point
+            A.append(x)
+            B.append(y)
+            C.append(z)
+        ax.plot(A, B, C, label=f'{unique_id_arete}')
 
 
-for unique_id_arete in coordinates:
-    X = []
-    Y = []
-    Z = []
-    for point in coordinates[unique_id_arete]:
-        x, y, z  = point
-        X.append(x)
-        Y.append(y)
-        Z.append(z)
-    ax.plot(X, Y, Z, label=f'{unique_id_arete}')
+    X, Y, Z = [], [], []
+    n = 0
+    for line in command_orders:
+        if line == '\n':
+            ax.plot(X, Y, Z, label=f'motif {n}')
+            n += 1
+            X, Y, Z = [], [], []
+        else :
+            line = line.strip()
+            x, y, z = Float(line.split(', '))
+            X.append(x)
+            Y.append(y)
+            Z.append(z)
 
-ax.set_aspect('auto')
-ax.legend()
-plt.show()
+    ax.set_aspect('auto')
+    ax.legend()
+    plt.show()

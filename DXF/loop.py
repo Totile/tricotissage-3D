@@ -7,9 +7,9 @@ from sketch_nails import generate_nails
 FILE_NAMES = [f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/arete_{k}-16.dxf' for k in range(1, 17)]
 #save_final_as = '/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/production.dxf'
 
-length_absolute_path = len('/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/')
+length_absolute_path = len('')
 
-nb_nails=15
+nb_nails=9
 length_nail=10
 width_nail=3
 

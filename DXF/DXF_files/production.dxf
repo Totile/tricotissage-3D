@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2459886.631909722
+2459891.436550926
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2459886.631909722
+2459891.436550926
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{4EA129CA-6E38-42E7-A3B9-EFF4DB9AFA53}
+{65DC4A96-2EFA-485D-9490-7AA28A2C760A}
   9
 $VERSIONGUID
   2
-{D2A9E78B-75A4-46C3-BE37-DFB592D20807}
+{E616A61D-1399-4259-98BE-D6D2935F003A}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-2
+3
   0
 LAYER
   5
@@ -1594,6 +1594,30 @@ Defpoints
 Continuous
 290
 0
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+2F
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+MySketch
+ 70
+0
+ 62
+255
+  6
+CONTINUOUS
 370
 -3
 390
@@ -2025,13 +2049,13 @@ ENTITIES
   0
 LWPOLYLINE
   5
-2F
+30
 330
 17
 100
 AcDbEntity
   8
-0
+MySketch
 100
 AcDbPolyline
  90
@@ -2701,11 +2725,11 @@ AcDbPolyline
  10
 -49.0
  20
-396.134
+401.134
  10
 -41.0
  20
-396.134
+401.134
  10
 -41.0
  20
@@ -2717,11 +2741,11 @@ AcDbPolyline
  10
 -19.0
  20
-396.134
+401.134
  10
 -11.0
  20
-396.134
+401.134
  10
 -11.0
  20
@@ -2785,33 +2809,13 @@ AcDbPolyline
   0
 CIRCLE
   5
-30
-330
-17
-100
-AcDbEntity
-  8
-0
-100
-AcDbCircle
- 10
-0.0
- 20
--90.0
- 30
-0.0
- 40
-5.0
-  0
-CIRCLE
-  5
 31
 330
 17
 100
 AcDbEntity
   8
-0
+MySketch
 100
 AcDbCircle
  10
@@ -2831,7 +2835,7 @@ CIRCLE
 100
 AcDbEntity
   8
-0
+MySketch
 100
 AcDbCircle
  10
@@ -3849,7 +3853,7 @@ DictionaryVariables
 280
 0
   1
-0.18.1 @ 2022-11-02T14:09:57.739262+00:00
+0.18.1 @ 2022-11-07T09:28:38.214535+00:00
   0
 DICTIONARYVAR
   5
@@ -3861,7 +3865,7 @@ DictionaryVariables
 280
 0
   1
-0.18.1 @ 2022-11-02T14:09:57.740375+00:00
+0.18.1 @ 2022-11-07T09:28:38.215654+00:00
   0
 ENDSEC
   0

@@ -50,8 +50,6 @@ def down(point, radius):
     point[2] -= radius
     return point
 
-
-
 def motif(list_1, list_2):
     """
     From two lists of points, this function generates the 
@@ -118,6 +116,7 @@ def motif_inter0(list_1, list_2, radial_offset):
 
     for i1 in range(length):
 
+        print(last)
         if last.any() : # "if any of the coordinates of last is non nul"
             intermediate_point = inter(last, couples_1[i1][0], radial_offset, to='left') ##
             motif.append(intermediate_point)

@@ -15,7 +15,7 @@ mpl.rcParams['legend.fontsize'] = 10
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 
-# tracé de l'axe des altitudes
+# plot of the z-axis
 J = np.linspace(0, 400, 100)
 H = I = np.zeros(shape=(100, ))
 ax.plot(H, I, J, label='z-axis')

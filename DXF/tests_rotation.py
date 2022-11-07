@@ -12,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 Float = np.vectorize(float)
 
 mpl.rcParams['legend.fontsize'] = 10
-factor = 2
+factor = 1.5
 fig = plt.figure(figsize = [factor * 6.4, factor * 4.8])
 ax = plt.axes(projection='3d')
 
@@ -143,12 +143,47 @@ with open(f'./command_orders_rotation.txt', 'r', encoding='utf-8') as command_or
     X, Y, Z = [], [], []
     nb_arete = len(coordinates.keys())
     for i in range(nb_arete ):
-        for x, y, z in motif_inter0_margin(coordinates[f'{i}'], coordinates[f'{(i + 1) % nb_arete}'], radial_offset, radius=2):
+        for x, y, z in motif_inter0(coordinates[f'{i}'], coordinates[f'{(i + 1) % nb_arete}'], radial_offset):
             X.append(x)
             Y.append(y)
             Z.append(z)
 
     ax.plot(X, Y, Z, color='blue',alpha=0.5)
+    
+    """
+
+    radial_offset = 5 # in millimeters
+
+    list1 = [np.array((0., 0., i)) for i in range(0, 50, 6)]
+    list2 = [np.array((0., 10., i)) for i in range(0, 50, 6)]
+
+    size = 100
+    arete1 = [np.zeros(shape=(100,)), np.zeros(shape=(100,)), np.linspace(0, 50, 100)]
+    arete2 = [np.zeros(shape=(100,)), np.array([10]*100), np.linspace(0, 50, 100)]
+
+    ax.plot(*arete1, color='red',alpha=0.5)
+    ax.plot(*arete2, color='orange',alpha=0.5)
+    
+    X, Y, Z = [], [], []
+    nb_arete = len(coordinates.keys())
+    for i in range(1):
+        for x, y, z in motif_inter0(list1, list2, radial_offset=radial_offset):
+            X.append(x)
+            Y.append(y)
+            Z.append(z)
+
+    A, B, C = [], [], []
+    nb_arete = len(coordinates.keys())
+    for i in range(1):
+        for x, y, z in motif_inter0_margin(list1, list2, radial_offset=radial_offset, radius=0.1):
+            A.append(x)
+            B.append(y)
+            C.append(z)
+
+
+    ax.plot(X, Y, Z, color='blue',alpha=0.5)
+    #ax.plot(A, B, C, color='limegreen',alpha=0.5)
+
 
     """
     U, V, W = [], [], []
@@ -160,7 +195,7 @@ with open(f'./command_orders_rotation.txt', 'r', encoding='utf-8') as command_or
             W.append(z)
 
     ax.plot(U, V, W, color='limegreen',alpha=0.5)
-    """
+
 
     ax.set_aspect('auto')
     ax.legend()

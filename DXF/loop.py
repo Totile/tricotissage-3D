@@ -9,7 +9,7 @@ FILE_NAMES = [f'/Users/yvesabraham/Desktop/taff/2A/Mecatro/DXF/DXF_files/arete_{
 
 length_absolute_path = len('')
 
-nb_nails=9
+nb_nails=13
 length_nail=10
 width_nail=3
 

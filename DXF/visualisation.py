@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from ezdxf import recover
 from ezdxf.addons.drawing import RenderContext, Frontend
 from ezdxf.addons.drawing.matplotlib import MatplotlibBackend
+import ezdxf.addons.acadctb
 
 def visualisation(DXF_file):
     # Safe loading procedure (requires ezdxf v0.14):
@@ -23,7 +24,7 @@ def visualisation(DXF_file):
     if not auditor.has_errors:
         fig = plt.figure()
         ax = fig.add_axes([0, 0, 1, 1])
-        ctx = RenderContext(doc)
+        ctx = RenderContext(doc) #ctx = RenderContext(doc, ctb=filename)
         out = MatplotlibBackend(ax)
         Frontend(ctx, out).draw_layout(doc.modelspace(), finalize=True)
         fig.savefig(DXF_file[:-3] + 'png', dpi=300)
